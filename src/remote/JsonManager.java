@@ -9,6 +9,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import controller.ControllerCity;
+import controller.ControllerWeatherNowPK;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -35,6 +36,8 @@ public class JsonManager {
     public void refreshCities(){
         
         ArrayList cities = new ArrayList();
+        ArrayList weathernowPK = new ArrayList();
+        ArrayList weathernow = new ArrayList();
         
         try
         {
@@ -67,17 +70,36 @@ public class JsonManager {
             ControllerCity ctrlCity = new ControllerCity();
             ctrlCity.refreshCities(cities);
             
-            JsonObject mainNode;
+            JsonObject mainNode,windNode,weatherNode;
+            Weathernow newWeatherNow;
             for(int i =0 ; i<count;i++){
                 node = mainJsonObject.getAsJsonArray("list").get(i).getAsJsonObject();
-                mainNode=node.get("main").getAsJsonObject();
+                mainNode = node.get("main").getAsJsonObject();
+                
                 WeathernowPK newWeatherNowPK = new WeathernowPK(new Date (node.get("dt").getAsLong()*1000),node.get("id").getAsInt());
+                weathernowPK.add(newWeatherNowPK);
+                
+                newWeatherNow = new Weathernow(newWeatherNowPK);
+                newWeatherNow.setTemperature(mainNode.get("temp").getAsDouble());
+                newWeatherNow.setFeelslike(mainNode.get("feels_like").getAsDouble());
+                newWeatherNow.setHumidity(mainNode.get("humidity").getAsDouble());
+                windNode = node.get("wind").getAsJsonObject();
+                newWeatherNow.setWindspeed(windNode.get("speed").getAsDouble());
+                newWeatherNow.setWinddirection(windNode.get("deg").getAsInt());
+                weatherNode = node.getAsJsonArray("weather").get(0).getAsJsonObject();
+                newWeatherNow.setDescription(weatherNode.get("description").getAsString());
+                newWeatherNow.setIcon(weatherNode.get("icon").getAsString());
+                newWeatherNow.setRain(0.0);
+                newWeatherNow.setSnow(0.0);
+                weathernow.add(newWeatherNow);
                 
 
 
                 //System.out.println(newWeatherNow.getDate());
                 
             }
+            ControllerWeatherNowPK ctrlWeatherNowPK = new ControllerWeatherNowPK();
+            //ctrlWeatherNowPK.refreshWeathernowPK(weathernowPK);
             
         } 
         catch (MalformedURLException ex)

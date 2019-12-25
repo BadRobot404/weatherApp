@@ -26,7 +26,7 @@ public class ControllerWeatherNowPK extends Controller
         em.getTransaction().begin();
         for (WeathernowPK w : wn)
         {
-            //System.out.println(c.getCityname());
+            System.out.println(w.getCityid());
             em.persist(w);
         }
         em.getTransaction().commit();
