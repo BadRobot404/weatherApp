@@ -17,9 +17,12 @@ public class GUIMainMenu extends javax.swing.JFrame {
     /**
      * Creates new form GUIMainMenu
      */
+    private final  GUIWeatherNow weathernow = new GUIWeatherNow();
+    
     public GUIMainMenu() {
         initComponents();
         this.setLayout(new BorderLayout(5,5));
+        
         
     }
 
@@ -75,10 +78,10 @@ public class GUIMainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        if(weathernow.isVisible()){
-//            return;
-//        }
-//        weathernow.setVisible(true);
+        if(weathernow.isVisible()){
+            return;
+        }
+        weathernow.setVisible(true);
         JsonManager jm = new JsonManager();
         jm.refreshCities();
 //        jm.cityInit();

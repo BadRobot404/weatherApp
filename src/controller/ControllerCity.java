@@ -25,7 +25,7 @@ public class ControllerCity extends Controller
     
     public void refreshCities(List<City> cities)
     {
-        clearTable();
+        
         
         em.getTransaction().begin();
         for (City c : cities)

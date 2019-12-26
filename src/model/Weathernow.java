@@ -37,7 +37,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Weathernow.findByIcon", query = "SELECT w FROM Weathernow w WHERE w.icon = :icon")
     , @NamedQuery(name = "Weathernow.findByHumidity", query = "SELECT w FROM Weathernow w WHERE w.humidity = :humidity")
     , @NamedQuery(name = "Weathernow.findByDescription", query = "SELECT w FROM Weathernow w WHERE w.description = :description")
-    , @NamedQuery(name = "Weathernow.findByWinddirection", query = "SELECT w FROM Weathernow w WHERE w.winddirection = :winddirection")})
+    , @NamedQuery(name = "Weathernow.findByWinddirection", query = "SELECT w FROM Weathernow w WHERE w.winddirection = :winddirection")
+    , @NamedQuery(name = "WeatherNow.deleteAll", query = "DELETE  FROM Weathernow")})
 public class Weathernow implements Serializable {
 
     private static final long serialVersionUID = 1L;

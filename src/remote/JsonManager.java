@@ -69,6 +69,9 @@ public class JsonManager {
             }
             
             ControllerCity ctrlCity = new ControllerCity();
+            ControllerWeatherNow ctrlWeatherNow = new ControllerWeatherNow();
+            ctrlWeatherNow.clearTable();
+            ctrlCity.clearTable();
             ctrlCity.refreshCities(cities);
             
             JsonObject mainNode,windNode,weatherNode;
@@ -100,7 +103,8 @@ public class JsonManager {
                 //System.out.println(newWeatherNow.getDate());
                 
             }
-            ControllerWeatherNow ctrlWeatherNow = new ControllerWeatherNow();
+            
+            
             ctrlWeatherNow.insertDataFromJson(weathernow);
             System.out.println("Refresh Completed");
             
