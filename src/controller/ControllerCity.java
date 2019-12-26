@@ -17,6 +17,13 @@ public class ControllerCity extends Controller
         super();
     }
     
+    public List listCities(){
+        
+        Query q = em.createNamedQuery("City.namesAll");
+        
+        return q.getResultList();
+    }
+    
     /*Εύρεση πόλης με το αντίστοιχο Id*/
     public City findCityByCityId(int cityId)
     {

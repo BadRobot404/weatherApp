@@ -5,7 +5,9 @@
  */
 package view;
 
+import controller.ControllerCity;
 import java.awt.BorderLayout;
+import javax.swing.DefaultComboBoxModel;
 import remote.JsonManager;
 
 /**
@@ -84,7 +86,6 @@ public class GUIMainMenu extends javax.swing.JFrame {
         weathernow.setVisible(true);
         JsonManager jm = new JsonManager();
         jm.refreshCities();
-//        jm.cityInit();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

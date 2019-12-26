@@ -5,6 +5,10 @@
  */
 package view;
 
+import controller.ControllerCity;
+import java.util.Arrays;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author Bill
@@ -16,6 +20,16 @@ public class GUIWeatherNow extends javax.swing.JFrame {
      */
     public GUIWeatherNow() {
         initComponents();
+        ControllerCity ctrlCity = new ControllerCity();
+        String[] label = new String[50];
+        int i = 0;
+        for(Object c : ctrlCity.listCities().toArray() ){
+            label[i] = c.toString();
+            i++;
+        }
+        Arrays.sort(label);
+        final DefaultComboBoxModel model = new DefaultComboBoxModel(label);
+        jComboBox1.setModel(model);
     }
 
     /**
@@ -30,9 +44,10 @@ public class GUIWeatherNow extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Ο Καιρός Τώρα");
         setBackground(new java.awt.Color(72, 182, 231));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(jComboBox1.getModel());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -41,14 +56,14 @@ public class GUIWeatherNow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(307, Short.MAX_VALUE))
+                .addContainerGap(552, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(243, Short.MAX_VALUE))
+                .addContainerGap(424, Short.MAX_VALUE))
         );
 
         pack();
@@ -84,7 +99,9 @@ public class GUIWeatherNow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new GUIWeatherNow().setVisible(true);
+                
             }
         });
     }
