@@ -9,6 +9,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import controller.ControllerCity;
+import controller.ControllerWeatherNow;
 import controller.ControllerWeatherNowPK;
 import java.io.IOException;
 import java.io.InputStream;
@@ -75,11 +76,12 @@ public class JsonManager {
             for(int i =0 ; i<count;i++){
                 node = mainJsonObject.getAsJsonArray("list").get(i).getAsJsonObject();
                 mainNode = node.get("main").getAsJsonObject();
+                                
+                newWeatherNow = new Weathernow(new WeathernowPK());
                 
-                WeathernowPK newWeatherNowPK = new WeathernowPK(new Date (node.get("dt").getAsLong()*1000),node.get("id").getAsInt());
-                weathernowPK.add(newWeatherNowPK);
+                newWeatherNow.getWeathernowPK().setDate(new Date (node.get("dt").getAsLong()*1000));
+                newWeatherNow.getWeathernowPK().setCityid(node.get("id").getAsInt());
                 
-                newWeatherNow = new Weathernow(newWeatherNowPK);
                 newWeatherNow.setTemperature(mainNode.get("temp").getAsDouble());
                 newWeatherNow.setFeelslike(mainNode.get("feels_like").getAsDouble());
                 newWeatherNow.setHumidity(mainNode.get("humidity").getAsDouble());
@@ -98,8 +100,9 @@ public class JsonManager {
                 //System.out.println(newWeatherNow.getDate());
                 
             }
-            ControllerWeatherNowPK ctrlWeatherNowPK = new ControllerWeatherNowPK();
-            //ctrlWeatherNowPK.refreshWeathernowPK(weathernowPK);
+            ControllerWeatherNow ctrlWeatherNow = new ControllerWeatherNow();
+            ctrlWeatherNow.insertDataFromJson(weathernow);
+            System.out.println("Refresh Completed");
             
         } 
         catch (MalformedURLException ex)
