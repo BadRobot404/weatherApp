@@ -24,6 +24,12 @@ public class ControllerCity extends Controller
         return q.getResultList();
     }
     
+    public City findCityIDByCityName(String cityName)
+    {
+        Query q = em.createNamedQuery("City.findByCityname").setParameter("cityname", cityName);
+        return (City) q.getSingleResult();
+    }
+    
     /*Εύρεση πόλης με το αντίστοιχο Id*/
     public City findCityByCityId(int cityId)
     {

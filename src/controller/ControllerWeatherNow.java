@@ -40,8 +40,10 @@ public final class ControllerWeatherNow extends Controller
     // Ανάκτηση καιρικών συνθηκών για την επιλεγμένη πόλη
     public Weathernow selectWeatherNowByCityName(String cityName)
     {
-        Query q = em.createNamedQuery("WeatherNow.findByCityName");
-        q.setParameter("cityName", cityName);
+        ControllerCity ct = new ControllerCity();
+        int cityID = ct.findCityIDByCityName(cityName).getCityid();
+        Query q = em.createNamedQuery("Weathernow.findByCityid");
+        q.setParameter("cityid", cityID);
         return (Weathernow) q.getSingleResult();
     }
     

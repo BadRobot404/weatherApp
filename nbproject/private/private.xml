@@ -5,7 +5,7 @@
         <group>
             <file>file:/C:/Users/Bill/Documents/NetBeansProjects/WeatherApp/src/weatherapp/WeatherApp.java</file>
             <file>file:/C:/Users/Bill/Documents/NetBeansProjects/WeatherApp/src/remote/JsonManager.java</file>
-            <file>file:/C:/Users/Bill/Documents/NetBeansProjects/WeatherApp/src/controller/ControllerWeatherNowPK.java</file>
+            <file>file:/C:/Users/Bill/Documents/NetBeansProjects/WeatherApp/src/view/GUIWeatherNow.java</file>
             <file>file:/C:/Users/Bill/Documents/NetBeansProjects/WeatherApp/src/view/GUIMainMenu.java</file>
         </group>
     </open-files>
