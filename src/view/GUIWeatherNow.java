@@ -159,14 +159,16 @@ public class GUIWeatherNow extends javax.swing.JFrame {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         DecimalFormat df2 = new DecimalFormat("#.#");
         
+        String directions[] = {"Β", "ΒΑ", "Α", "ΝΑ", "Ν", "ΝΔ", "Δ", "ΒΔ"};
+        
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.addRow(new Object[]{w.getDescription()
                                 , sdf.format(w.getWeathernowPK().getDate())
                                 , df2.format(w.getTemperature())
                                 , df2.format(w.getFeelslike())
                                 , w.getHumidity() + "%"
-                                , w.getWindspeed()
-                                ,"N"});
+                                , Math.round(Math.pow(((w.getWindspeed()*3.6)/3.01),0.667))
+                                ,directions[ (int)Math.round((  ((double)w.getWinddirection()% 360) / 45)) % 8 ]});
         System.out.println(w.getTemperature());
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
