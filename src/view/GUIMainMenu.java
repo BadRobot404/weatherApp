@@ -24,8 +24,7 @@ public class GUIMainMenu extends javax.swing.JFrame {
     public GUIMainMenu() {
         initComponents();
         this.setLayout(new BorderLayout(5,5));
-        
-        
+                
     }
 
     /**

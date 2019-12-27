@@ -7,6 +7,8 @@ package view;
 
 import controller.ControllerCity;
 import controller.ControllerWeatherNow;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -98,11 +100,11 @@ public class GUIWeatherNow extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Περιγραφή", "Ημερομηνία", "Θερμοκρασία", "Αίσθηση Θερμοκρασίας", "Υγρασία", "Ταχύτητα Ανέμου", "Διεύθυνση Ανέμου"
+                "Περιγραφή", "Ώρα", "Θερμοκρασία", "Αίσθηση Θερμοκρασίας", "Υγρασία", "Ταχύτητα Ανέμου", "Διεύθυνση Ανέμου"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class
+                java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, true
@@ -149,15 +151,20 @@ public class GUIWeatherNow extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         JComboBox cb = (JComboBox) evt.getSource();
         String name = (String) cb.getSelectedItem();
+        
         //find current weather of the selected City
         ControllerWeatherNow wn = new ControllerWeatherNow();
         Weathernow w = wn.selectWeatherNowByCityName(name);
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        DecimalFormat df2 = new DecimalFormat("#.#");
+        
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.addRow(new Object[]{w.getDescription()
-                                , w.getWeathernowPK().getDate()
-                                , w.getTemperature()
-                                , w.getFeelslike()
-                                , w.getHumidity()
+                                , sdf.format(w.getWeathernowPK().getDate())
+                                , df2.format(w.getTemperature())
+                                , df2.format(w.getFeelslike())
+                                , w.getHumidity() + "%"
                                 , w.getWindspeed()
                                 ,"N"});
         System.out.println(w.getTemperature());
